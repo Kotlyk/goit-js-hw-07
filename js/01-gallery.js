@@ -1,25 +1,47 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
 
 const galaryList = document.querySelector(".gallery");
 
+
 const imageNew = galleryItems
   .map(
-    (image) =>
-      `<a class="gallery__link" href="large-image.jpg">
+    (galleryItems) =>
+      `<a class="gallery__link" href=${galleryItems.original}>
     <img
       class="gallery__image"
-      src="${galleryItems.preview}"
-      data-source="large-image.jpg"
-      alt="${galleryItems.discription}"
+      src=${galleryItems.preview}
+      data-source=${galleryItems.original}
+      alt=${galleryItems.description}
     />
   </a>`
   )
   .join("");
 
-list.insertAdjacentHTML("beforeend", imageNew);
+const render = () => {
+  galaryList.innerHTML = '';
+  galaryList.insertAdjacentHTML("beforeend", imageNew);
+};
 
+render();
 
-galaryList.addEventListener('click', onClick);
+const onClick = (evt) => {
+  evt.preventDefault();
+  if (evt.target === evt.currentTarget) return;
+  const origImg = evt.target.dataset.source;
+ 
+  const instance = basicLightbox.create(`
+    <img class="gallery__image" src=${origImg} width=100% height=100%>
+`);
+
+  instance.show();
+  instance
+    .element()
+    .querySelector("Escape")
+    .addEventListener("click", instance.close);
+};
+
+galaryList.addEventListener('click', onClick)
+  
+
