@@ -8,14 +8,16 @@ const galaryList = document.querySelector(".gallery");
 const imageNew = galleryItems
   .map(
     (galleryItems) =>
-      `<a class="gallery__link" href=${galleryItems.original}>
+      `<div class="gallery__item">
+      <a class="gallery__link" href=${galleryItems.original}>
     <img
       class="gallery__image"
       src=${galleryItems.preview}
       data-source=${galleryItems.original}
       alt=${galleryItems.description}
     />
-  </a>`
+  </a>
+  </div>`
   )
   .join("");
 
@@ -32,16 +34,14 @@ const onClick = (evt) => {
   const origImg = evt.target.dataset.source;
  
   const instance = basicLightbox.create(`
-    <img class="gallery__image" src=${origImg} width=100% height=100%>
+    <img class="gallery__image" src=${origImg}>
 `);
 
   instance.show();
   instance
     .element()
-    .querySelector("Escape")
     .addEventListener("click", instance.close);
 };
 
 galaryList.addEventListener('click', onClick)
   
-
