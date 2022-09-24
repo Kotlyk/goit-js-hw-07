@@ -43,5 +43,11 @@ const onClick = (evt) => {
     .addEventListener("click", instance.close);
 };
 
+
+
+
+
+
+
 galaryList.addEventListener('click', onClick)
   
